@@ -1,0 +1,60 @@
+<html>
+    
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    
+    <title>City Finder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
+
+</head>
+
+<body>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  
+
+  <main role="main" class="px-3">
+    <h1>All Dogs are Good Dogs</h1>
+    <p class="lead">
+      <a href="#" id = "button" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">Refresh</a>
+    </p>
+  </main>
+  <div id = "dog_pic">
+  </div>
+  <div id = "dog_phrase">
+  </div>
+
+  <footer class="mt-auto text-white-50">
+    <p>Creative Project 2 <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+  </footer>
+</div>
+  <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+</html>
+
+<script>
+document.getElementById("button").addEventListener("click", function(event) {
+    event.preventDefault();
+    const url = "https://random.dog/woof.json";
+    fetch(url)
+      .then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            console.log(json);
+            if(json.url.lastIndexOf("4") == json.url.length-1){
+              document.getElementById("dog_pic").innerHTML = 
+              "<video width='320' height='240' controls> <source src= '" + json.url + 
+              "' type='video/mp4'> Your browser does not support the video tag</video>";
+            }else{
+              document.getElementById("dog_pic").innerHTML = "<img src = '"+json.url+"'>";
+
+            }
+            document.getElementById("dog_phrase").innerHTML = "You have been visited by a good boy";
+        });
+});
+</script>
